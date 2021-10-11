@@ -1,10 +1,5 @@
 package fr.univ_montpellier.fsd.sudoku.imp;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class Sudoku {
 
 	int n;
@@ -26,11 +21,74 @@ public class Sudoku {
 	 * check if this.grid is a correct sudoku solution.
 	 * 
 	 */
-
 	private boolean solutionChecker() {
-		// TODO
-		return false;
 
+		boolean checkLines = checkLines();
+		boolean checkColumns = checkColumns();
+		boolean checkBlocs = checkBlocs();
+		
+		return checkBlocs && checkColumns && checkLines;
+	}
+	
+	private boolean checkLines() {
+		for (int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				
+				int value = grid[i][j];
+				
+				for(int k = 0; k < n; k++) {
+					
+					if (j != k && value == grid[i][k]) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean checkColumns() {
+		for (int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				
+				int value = grid[j][i];
+				
+				for(int k = 0; k < n; k++) {
+					
+					if (j != k && value == grid[k][i]) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean checkBlocs() {
+		for(int nbBlocI = 0; nbBlocI < n; nbBlocI += s) {
+			for (int nbBlocJ = 0; nbBlocJ < n; nbBlocJ += s) {
+				
+				// Vérification d'un bloc
+				for(int i = 0; i < s; i++) {
+					for(int j = 0; j < s; j++) {
+						int value = grid[i][j];
+						
+						for(int k = 0; k < s; k++) {
+							for(int l = 0; l < s; l++) {
+								
+								if ((k != i || l != j) && value == grid[k][l]) {
+									return false;
+								}
+							}
+						}
+					}	
+				}
+			}
+		}
+		
+		return true;
 	}
 
 	/*
@@ -39,8 +97,33 @@ public class Sudoku {
 	 */
 
 	private void generateSolution() {
-		// TODO
 
+		int value = 1, i = 0, j = 0, counter = 0;
+		
+		while(i < n) {
+			
+			while (counter < n) {
+				
+					grid[i][j] = value++;
+					j++;
+					
+					if (j == n) {
+						j = 0;
+					}
+				
+				counter++;
+			}
+			
+			counter = 0;
+			j = ((j + s) % n);
+			
+			if ((i+1) % s == 0 && i != 0) {
+				j++;
+			}
+			
+			value = 1;
+			i++;
+		}
 	}
 
 	/*
@@ -49,11 +132,31 @@ public class Sudoku {
 	 */
 	public void findSolution() {
 
-		// TODO
+		generateSolution();
+		
+		boolean result = solutionChecker();
+		
+		System.out.println("Résultat : " + result);
+	}
+	
+	/**
+	 * Affiche la grille de sudoku.
+	 */
+	private void printGrid() {
+		
+		for (int k = 0; k < n; k++) {
+			for(int l = 0; l < n; l++) {
+				System.out.print(grid[k][l] + " ");
+			}
+			System.out.println("");
+		}
 	}
 
 	public static void main(String args[]) {
-		new Sudoku(4).findSolution();
-
+		
+		Sudoku sudoku = new Sudoku(1024);
+		sudoku.findSolution();
+		
+		sudoku.printGrid();
 	}
 }
