@@ -1,7 +1,5 @@
 package fr.univ_montpellier.fsd.sudoku;
 
-import fr.univ_montpellier.fsd.sudoku.imp.Sudoku;
-
 /**
  * Hello world!
  *
@@ -13,7 +11,7 @@ public class App
     	
     	// Notre solution
     	long start = System.currentTimeMillis();
-		new fr.univ_montpellier.fsd.sudoku.imp.Sudoku(1024).findSolution();
+		new fr.univ_montpellier.fsd.sudoku.imp.Sudoku(25).findSolution();
 		long end = System.currentTimeMillis();
 
 		System.out.println("Temps d'exécution : " + (end - start) + "ms");
