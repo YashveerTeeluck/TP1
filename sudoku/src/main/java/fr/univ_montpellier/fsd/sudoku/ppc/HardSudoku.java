@@ -37,7 +37,7 @@ public class HardSudoku {
 			formatter.printHelp("sudoku", options, true);
 			System.exit(0);
 		}
-		instance = 4;
+		instance = 9;
 		// Check arguments and options
 		for (Option opt : line.getOptions()) {
 			checkOption(line, opt.getLongOpt());
@@ -46,7 +46,7 @@ public class HardSudoku {
 		n = instance;
 		s = (int) Math.sqrt(n);
 
-		new Sudoku().solve();
+		new HardSudoku().solve();
 	}
 
 	public void solve() {
@@ -90,9 +90,7 @@ public class HardSudoku {
 			}
 		}
 
-		for (
-
-				int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			System.out.println(i);
 			model.allDifferent(rows[i], "AC").post();
 			model.allDifferent(cols[i], "AC").post();
@@ -103,7 +101,29 @@ public class HardSudoku {
 		// TODO: add constraints here
 
 		
+		model.arithm(rows[0][0], "=", 8);
+		model.arithm(rows[2][1], "=", 3);
+		model.arithm(rows[4][1], "=", 6);
+		model.arithm(rows[1][2], "=", 7);
+		model.arithm(rows[4][2], "=", 9);
+		model.arithm(rows[6][2], "=", 2);
 		
+		model.arithm(rows[1][3], "=", 5);
+		model.arithm(rows[5][3], "=", 7);
+		model.arithm(rows[4][4], "=", 4);
+		model.arithm(rows[5][4], "=", 5);
+		model.arithm(rows[6][4], "=", 7);
+		model.arithm(rows[3][5], "=", 1);
+		model.arithm(rows[7][5], "=", 3);
+		
+		model.arithm(rows[2][6], "=", 1);
+		model.arithm(rows[7][6], "=", 6);
+		model.arithm(rows[8][6], "=", 8);
+		model.arithm(rows[2][7], "=", 8);
+		model.arithm(rows[3][7], "=", 5);
+		model.arithm(rows[6][7], "=", 1);
+		model.arithm(rows[1][8], "=", 9);
+		model.arithm(rows[6][8], "=", 4);
 		// --------------------------------------
 
 	}

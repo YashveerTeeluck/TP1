@@ -78,12 +78,10 @@ public class Sudoku {
 	private boolean checkBlocs() {
 		for(int nbBlocI = 0; nbBlocI < n; nbBlocI += s) {
 			for (int nbBlocJ = 0; nbBlocJ < n; nbBlocJ += s) {
-				
-				// Vérification d'un bloc
 				for(int i = 0; i < s; i++) {
 					for(int j = 0; j < s; j++) {
-						int value = grid[i][j];
 						
+						int value = grid[i][j];
 						for(int k = 0; k < s; k++) {
 							for(int l = 0; l < s; l++) {
 								
@@ -120,9 +118,6 @@ public class Sudoku {
 					{
 						grid[i][j] = value;
 						value = 1;
-						
-						printGrid();
-						System.out.println("");
 					}
 					else 
 					{
@@ -262,6 +257,8 @@ public class Sudoku {
 		boolean result = solutionChecker();
 		
 		System.out.println("Résultat : " + result);
+		
+		printGrid();
 	}
 	
 	/**
@@ -279,9 +276,7 @@ public class Sudoku {
 
 	public static void main(String args[]) {
 		
-		Sudoku sudoku = new Sudoku(16);
+		Sudoku sudoku = new Sudoku(9);
 		sudoku.findSolution();
-		
-		sudoku.printGrid();
 	}
 }

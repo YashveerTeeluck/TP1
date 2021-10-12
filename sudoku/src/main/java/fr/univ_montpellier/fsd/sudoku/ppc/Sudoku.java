@@ -18,7 +18,7 @@ public class Sudoku {
 
 	static int n;
 	static int s;
-	private static int instance = 25;
+	private static int instance = 9;
 	private static long timeout = 3600000; // one hour
 
 	IntVar[][] rows, cols, shapes;
@@ -37,7 +37,7 @@ public class Sudoku {
 			formatter.printHelp("sudoku", options, true);
 			System.exit(0);
 		}
-		instance = 1024;
+		instance = 9;
 		// Check arguments and options
 		for (Option opt : line.getOptions()) {
 			checkOption(line, opt.getLongOpt());

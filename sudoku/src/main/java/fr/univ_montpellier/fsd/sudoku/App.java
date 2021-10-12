@@ -8,19 +8,18 @@ public class App
 {
     public static void main(String[] args)
     {
-    	
-    	// Notre solution
+
     	long start = System.currentTimeMillis();
-		new fr.univ_montpellier.fsd.sudoku.imp.Sudoku(25).findSolution();
+    	new fr.univ_montpellier.fsd.sudoku.ppc.Sudoku().solve();
 		long end = System.currentTimeMillis();
 
-		System.out.println("Temps d'exécution : " + (end - start) + "ms");
+		System.out.println("Temps d'exécution du solver choco : " + (end - start) + "ms");
 		
-
+    	// Notre solution
     	start = System.currentTimeMillis();
-    	new fr.univ_montpellier.fsd.sudoku.ppc.Sudoku().solve();
+		new fr.univ_montpellier.fsd.sudoku.imp.Sudoku(9).findSolution();
 		end = System.currentTimeMillis();
 
-		System.out.println("Temps d'exécution : " + (end - start) + "ms");
+		System.out.println("Temps d'exécution de l'algorithme naïf : " + (end - start) + "ms");
     }
 }
