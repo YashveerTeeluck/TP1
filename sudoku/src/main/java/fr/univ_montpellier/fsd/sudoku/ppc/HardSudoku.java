@@ -80,36 +80,6 @@ public class HardSudoku {
 			}
 		}
 
-		addValueConstraint(rows, cols, shapes, model, 0, 0, 8);
-		
-		addValueConstraint(rows, cols, shapes, model, 2, 1, 7);
-		addValueConstraint(rows, cols, shapes, model, 3, 1, 5);
-		addValueConstraint(rows, cols, shapes, model, 8, 1, 9);
-
-		addValueConstraint(rows, cols, shapes, model, 1, 2, 3);
-		addValueConstraint(rows, cols, shapes, model, 6, 2, 1);
-		addValueConstraint(rows, cols, shapes, model, 7, 2, 8);
-
-		addValueConstraint(rows, cols, shapes, model, 1, 3, 6);
-		addValueConstraint(rows, cols, shapes, model, 5, 3, 1);
-		addValueConstraint(rows, cols, shapes, model, 7, 3, 5);
-
-		addValueConstraint(rows, cols, shapes, model, 2, 4, 9);
-		addValueConstraint(rows, cols, shapes, model, 4, 4, 4);
-
-		addValueConstraint(rows, cols, shapes, model, 3, 5, 7);
-		addValueConstraint(rows, cols, shapes, model, 4, 5, 5);
-
-		addValueConstraint(rows, cols, shapes, model, 2, 6, 2);
-		addValueConstraint(rows, cols, shapes, model, 4, 6, 7);
-		addValueConstraint(rows, cols, shapes, model, 8, 6, 4);
-
-		addValueConstraint(rows, cols, shapes, model, 5, 7, 3);
-		addValueConstraint(rows, cols, shapes, model, 6, 7, 6);
-		addValueConstraint(rows, cols, shapes, model, 7, 7, 1);
-
-		addValueConstraint(rows, cols, shapes, model, 6, 8, 8);
-		
 		for (int i = 0; i < s; i++) {
 			for (int j = 0; j < s; j++) {
 				for (int k = 0; k < s; k++) {
@@ -126,11 +96,36 @@ public class HardSudoku {
 			model.allDifferent(cols[i], "AC").post();
 			model.allDifferent(shapes[i], "AC").post();
 		}
-	}
+		
+		model.arithm(rows[0][0], "=", 8).post();
+		
+		model.arithm(rows[2][1], "=", 7).post();
+		model.arithm(rows[3][1], "=", 5).post();
+		model.arithm(rows[8][1], "=", 9).post();
+		
+		model.arithm(rows[1][2], "=", 3).post();
+		model.arithm(rows[6][2], "=", 1).post();
+		model.arithm(rows[7][2], "=", 8).post();
 
-	private static void addValueConstraint(IntVar[][] rows, IntVar[][] cols, IntVar[][] shapes, Model model, int i, int j, int value) {
-		rows[i][j] = model.intVar("c_" + i + "_" + j, value, value, false);
-		cols[j][i] = rows[i][j];
+		model.arithm(rows[1][3], "=", 6).post();
+		model.arithm(rows[5][3], "=", 1).post();
+		model.arithm(rows[7][3], "=", 5).post();
+
+		model.arithm(rows[2][4], "=", 9).post();
+		model.arithm(rows[4][4], "=", 4).post();
+
+		model.arithm(rows[3][5], "=", 7).post();
+		model.arithm(rows[4][5], "=", 5).post();
+
+		model.arithm(rows[2][6], "=", 2).post();
+		model.arithm(rows[4][6], "=", 7).post();
+		model.arithm(rows[8][6], "=", 4).post();
+
+		model.arithm(rows[5][7], "=", 3).post();
+		model.arithm(rows[6][7], "=", 6).post();
+		model.arithm(rows[7][7], "=", 1).post();
+
+		model.arithm(rows[6][8], "=", 8).post();
 	}
 	
 	// Check all parameters values
