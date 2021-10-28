@@ -276,7 +276,7 @@ public class Sudoku {
 
 	public static void main(String args[]) {
 		
-		Sudoku sudoku = new Sudoku(9);
+		Sudoku sudoku = new Sudoku(25);
 		sudoku.findSolution();
 	}
 }

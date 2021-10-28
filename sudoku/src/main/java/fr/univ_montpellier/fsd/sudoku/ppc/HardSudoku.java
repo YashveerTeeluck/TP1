@@ -53,18 +53,26 @@ public class HardSudoku {
 
 		buildModel();
 		model.getSolver().showStatistics();
-		model.getSolver().solve();
+		
+		boolean findSolution = true;
+		while (findSolution) {
+			
+			findSolution = model.getSolver().solve();
 
-		StringBuilder st = new StringBuilder(String.format("Sudoku -- %s\n", instance, " X ", instance));
-		st.append("\t");
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				st.append(rows[i][j]).append("\t\t\t");
+			if (findSolution) {
+				
+				StringBuilder st = new StringBuilder(String.format("Sudoku -- %s\n", instance, " X ", instance));
+				st.append("\t");
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < n; j++) {
+						st.append(rows[i][j]).append("\t\t\t");
+					}
+					st.append("\n\t");
+				}
+				
+				System.out.println(st.toString());
 			}
-			st.append("\n\t");
 		}
-
-		System.out.println(st.toString());
 	}
 
 	public void buildModel() {
